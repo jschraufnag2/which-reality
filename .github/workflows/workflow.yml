@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Startup web server
-      run: docer run -v $(pdw):/var/www/html -dit --rm --name php php:apache
+      run: docker run -v $(pdw):/var/www/html -dit --rm --name php php:apache
     - name: OWASP ZAP Baseline Scan
       uses: zaproxy/action-baseline@v0.3.0
       with:
