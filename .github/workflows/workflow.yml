@@ -1,0 +1,21 @@
+
+
+
+
+name: SEC488 DAST
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Startup web server
+      run: docer run -v $(pdw):/var/www/html -dit --rm --name php php:apache
+    - name: OWASP ZAP Baseline Scan
+      uses: zaproxy/action-baseline@v0.3.0
+      with:
+        target: http://172.17.0.2
